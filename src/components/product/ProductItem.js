@@ -1,6 +1,7 @@
 import React from 'react';
 
 function ProductItem(props) {
+    const { product } = props;
     return (
         <li className="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1">
             <div className="product-inner equal-element">
@@ -14,7 +15,7 @@ function ProductItem(props) {
                 <div className="product-thumb">
                     <div className="thumb-inner">
                         <a href="#">
-                            <img src="assets/images/product-item-1.jpg" alt="img" />
+                            <img src={product.image} alt="img" />
                         </a>
                         <div className="thumb-group">
                             <div className="yith-wcwl-add-to-wishlist">
@@ -35,7 +36,7 @@ function ProductItem(props) {
                 </div>
                 <div className="product-info">
                     <h5 className="product-name product_title">
-                        <a href="#">Aluminum Plant</a>
+                        <a href="#">{product.name}</a>
                     </h5>
                     <div className="group-info">
                         <div className="stars-rating">
@@ -45,9 +46,9 @@ function ProductItem(props) {
                             <div className="count-star">(3)</div>
                         </div>
                         <div className="price">
-                            <del>$65</del>
-                            <ins>$45</ins>
+                           {product.price_format} VNĐ
                         </div>
+
                     </div>
                 </div>
             </div>
