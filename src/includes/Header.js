@@ -1,6 +1,9 @@
 import React from 'react';
 import HeaderUser from '../components/header/HeaderUser';
 import HeaderMinicart from '../components/header/HeaderMinicart';
+import { Link } from 'react-router-dom';
+import VerticalMenu from '../components/header/VerticalMenu';
+import MainMenu from '../components/header/MainMenu';
 
 function Header(props) {
     return (
@@ -44,9 +47,9 @@ function Header(props) {
                         <div className="row">
                             <div className="col-lg-3 col-sm-4 col-md-3 col-xs-7 col-ts-12 header-element">
                                 <div className="logo">
-                                    <a href="index.html">
-                                        <img src="images/logo.png" alt="img" />
-                                    </a>
+                                    <Link to={'/'}>
+                                        <img src="/images/logo.png" alt="img" />
+                                    </Link>
                                 </div>
                             </div>
                             <div className="col-lg-7 col-sm-8 col-md-6 col-xs-5 col-ts-12">
@@ -191,203 +194,8 @@ function Header(props) {
                 <div className="header-nav-container rows-space-20">
                     <div className="container">
                         <div className="header-nav-wapper main-menu-wapper">
-                            <div className="vertical-wapper block-nav-categori">
-                                <div className="block-title">
-                                    <span className="icon-bar">
-                                        <span />
-                                        <span />
-                                        <span />
-                                    </span>
-                                    <span className="text">All Categories</span>
-                                </div>
-                                <div className="block-content verticalmenu-content">
-                                    <ul className="stelina-nav-vertical vertical-menu stelina-clone-mobile-menu">
-                                        <li className="menu-item">
-                                            <a
-                                                href="#"
-                                            
-                                            >
-                                                New Arrivals
-                                            </a>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a
-                                                title="Hot Sale"
-                                                href="#"
-                                                className="stelina-menu-item-title"
-                                            >
-                                                Hot Sale
-                                            </a>
-                                        </li>
-                                        <li className="menu-item menu-item-has-children">
-                                            <a
-                                                title="Accessories"
-                                                href="#"
-                                                className="stelina-menu-item-title"
-                                            >
-                                                Accessories
-                                            </a>
-                                            <span className="toggle-submenu" />
-                                            <ul role="menu" className=" submenu">
-                                                <li className="menu-item">
-                                                    <a title="Living" href="#" className="stelina-item-title">
-                                                        Living
-                                                    </a>
-                                                </li>
-                                                <li className="menu-item">
-                                                    <a
-                                                        title="Accents"
-                                                        href="#"
-                                                        className="stelina-item-title"
-                                                    >
-                                                        Accents
-                                                    </a>
-                                                </li>
-                                                <li className="menu-item">
-                                                    <a
-                                                        title="New Arrivals"
-                                                        href="#"
-                                                        className="stelina-item-title"
-                                                    >
-                                                        New Arrivals
-                                                    </a>
-                                                </li>
-                                                <li className="menu-item">
-                                                    <a
-                                                        title="Accessories"
-                                                        href="#"
-                                                        className="stelina-item-title"
-                                                    >
-                                                        Accessories
-                                                    </a>
-                                                </li>
-                                                <li className="menu-item">
-                                                    <a
-                                                        title="Bedroom"
-                                                        href="#"
-                                                        className="stelina-item-title"
-                                                    >
-                                                        Bedroom
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a
-                                                title="Accents"
-                                                href="#"
-                                                className="stelina-menu-item-title"
-                                            >
-                                                Accents
-                                            </a>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a
-                                                title="Tables"
-                                                href="#"
-                                                className="stelina-menu-item-title"
-                                            >
-                                                Tables
-                                            </a>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a
-                                                title="Dining"
-                                                href="#"
-                                                className="stelina-menu-item-title"
-                                            >
-                                                Dining
-                                            </a>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a
-                                                title="Lighting"
-                                                href="#"
-                                                className="stelina-menu-item-title"
-                                            >
-                                                Lighting
-                                            </a>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a
-                                                title="Office"
-                                                href="#"
-                                                className="stelina-menu-item-title"
-                                            >
-                                                Office
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="header-nav">
-                                <div className="container-wapper">
-                                    <ul
-                                        className="stelina-clone-mobile-menu stelina-nav main-menu "
-                                        id="menu-main-menu"
-                                    >
-                                        <li className="menu-item  menu-item">
-                                            <a
-                                                href="/"
-                                                className="stelina-menu-item-title"
-                                                title="Home"
-                                            >
-                                                Home
-                                            </a>
-                                            <span className="toggle-submenu" />
-                                          
-                                        </li>
-                                        <li className="menu-item menu-item">
-                                            <a
-                                                href="/shop"
-                                                className="stelina-menu-item-title"
-                                                title="Shop"
-                                            >
-                                                Shop
-                                            </a>
-                                           
-                                        </li>
-                                        <li className="menu-item  menu-item-has-children item-megamenu">
-                                            <a href="#" className="stelina-menu-item-title" title="Pages">
-                                                Pages
-                                            </a>
-                                            <span className="toggle-submenu" />
-                                            <div className="submenu mega-menu menu-page">
-                                                <div className="row">
-                                                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-3 menu-page-item">
-                                                        <div className="stelina-custommenu default">
-                                                            <h2 className="widgettitle">Pages</h2>
-                                                            <ul className="menu">
-                                                                
-                                                             
-                                                                <li className="menu-item">
-                                                                    <a href="/cart">Shopping Cart</a>
-                                                                </li>
-                                                                <li className="menu-item">
-                                                                    <a href="/productdetail/1">Shop Detail</a>
-                                                                </li>
-                                                                <li className="menu-item">
-                                                                    <a href="/checkout">Checkout</a>
-                                                                </li>
-                                                                <li className="menu-item">
-                                                                    <a href="/login">Login</a>
-                                                                </li>
-                                                                <li className="menu-item">
-                                                                    <a href="/register">Register</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                   
-                                                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-3 menu-page-item"></div>
-                                                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-3 menu-page-item"></div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                       
-                                    </ul>
-                                </div>
-                            </div>
+                            <VerticalMenu/>
+                            <MainMenu/>
                         </div>
                     </div>
                 </div>
