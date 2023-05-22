@@ -9,11 +9,12 @@ function HeaderUser(props) {
     // Gọi API đăng xuất
     UserModel.logout()
       .then((response) => {
+        console.log(response);
         localStorage.removeItem('user');
         // Xử lý khi đăng xuất thành công
         Swal.fire({
           icon: 'success',
-          title: response.data.message,
+          title: 'dANG XUAT THANH CONG',
           showConfirmButton: false,
           timer: 1500,
         }).then(() => {
@@ -28,7 +29,6 @@ function HeaderUser(props) {
         Swal.fire({
           icon: 'error',
           title: 'Đăng xuất thất bại',
-          text: error.message,
         });
       });
   };

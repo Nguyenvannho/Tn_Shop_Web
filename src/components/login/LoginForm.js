@@ -21,11 +21,10 @@ function LoginForm() {
   const handleSubmit = (values) => {
     UserModel.login(values)
       .then((res) => {
-        console.log(res);
         localStorage.setItem('token', res.access_token);
         localStorage.setItem('user', JSON.stringify(res.user));
-        // navigate("/");
-        // handleLoginSuccess();
+        navigate("/");
+        handleLoginSuccess();
       })
       .catch((err) => {
         Swal.fire({
