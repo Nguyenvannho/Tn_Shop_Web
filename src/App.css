@@ -1,6 +1,13 @@
 .error {
   color: red;
 }
+.error-message {
+  color: red;
+}
+
+.error-field {
+  border: 1px solid red;
+}
 
 .App {
   text-align: center;
