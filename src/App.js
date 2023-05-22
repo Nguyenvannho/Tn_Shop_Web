@@ -1,12 +1,12 @@
 // import logo from "./logo.svg";
-// import "./App.css";
+import "./App.css";
 import ProductDetails from "./pages/ProductDetails";
 import { Route, Routes } from "react-router-dom";
 import Login from './pages/Login';
 import Shop from './pages/Shop';
 import Checkout from "./pages/Checkout";
 import Home from "./pages/Home";
-import ShoppingCart from "./pages/ShoppingCart";
+import ShoppingCart from "./pages/Cart";
 import Register from "./pages/Register";
 
 

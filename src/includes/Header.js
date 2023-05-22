@@ -1,4 +1,6 @@
 import React from 'react';
+import HeaderUser from '../components/header/HeaderUser';
+import HeaderMinicart from '../components/header/HeaderMinicart';
 
 function Header(props) {
     return (
@@ -33,11 +35,7 @@ function Header(props) {
                                     </ul>
                                 </div>
                             </div>
-                            <ul className="header-user-links">
-                                <li>
-                                    <a href="login.html">Login or Register</a>
-                                </li>
-                            </ul>
+                            <HeaderUser/>
                         </div>
                     </div>
                 </div>
@@ -88,142 +86,7 @@ function Header(props) {
                             </div>
                             <div className="col-lg-2 col-sm-12 col-md-3 col-xs-12 col-ts-12">
                                 <div className="header-control">
-                                    <div className="block-minicart stelina-mini-cart block-header stelina-dropdown">
-                                        <a
-                                            href="javascript:void(0);"
-                                            className="shopcart-icon"
-                                            data-stelina="stelina-dropdown"
-                                        >
-                                            Cart
-                                            <span className="count">0</span>
-                                        </a>
-                                        <div className="shopcart-description stelina-submenu">
-                                            <div className="content-wrap">
-                                                <h3 className="title">Shopping Cart</h3>
-                                                <ul className="minicart-items">
-                                                    <li className="product-cart mini_cart_item">
-                                                        <a href="#" className="product-media">
-                                                            <img
-                                                                src="images/item-minicart-1.jpg"
-                                                                alt="img"
-                                                            />
-                                                        </a>
-                                                        <div className="product-details">
-                                                            <h5 className="product-name">
-                                                                <a href="#">Bibliotheque</a>
-                                                            </h5>
-                                                            <div className="variations">
-                                                                <span className="attribute_color">
-                                                                    <a href="#">Black</a>
-                                                                </span>
-                                                                ,
-                                                                <span className="attribute_size">
-                                                                    <a href="#">300ml</a>
-                                                                </span>
-                                                            </div>
-                                                            <span className="product-price">
-                                                                <span className="price">
-                                                                    <span>$45</span>
-                                                                </span>
-                                                            </span>
-                                                            <span className="product-quantity">(x1)</span>
-                                                            <div className="product-remove">
-                                                                <a href="">
-                                                                    <i className="fa fa-trash-o" aria-hidden="true" />
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li className="product-cart mini_cart_item">
-                                                        <a href="#" className="product-media">
-                                                            <img
-                                                                src="images/item-minicart-2.jpg"
-                                                                alt="img"
-                                                            />
-                                                        </a>
-                                                        <div className="product-details">
-                                                            <h5 className="product-name">
-                                                                <a href="#">Soap Dining Solutions</a>
-                                                            </h5>
-                                                            <div className="variations">
-                                                                <span className="attribute_color">
-                                                                    <a href="#">Black</a>
-                                                                </span>
-                                                                ,
-                                                                <span className="attribute_size">
-                                                                    <a href="#">300ml</a>
-                                                                </span>
-                                                            </div>
-                                                            <span className="product-price">
-                                                                <span className="price">
-                                                                    <span>$45</span>
-                                                                </span>
-                                                            </span>
-                                                            <span className="product-quantity">(x1)</span>
-                                                            <div className="product-remove">
-                                                                <a href="">
-                                                                    <i className="fa fa-trash-o" aria-hidden="true" />
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li className="product-cart mini_cart_item">
-                                                        <a href="#" className="product-media">
-                                                            <img
-                                                                src="images/item-minicart-3.jpg"
-                                                                alt="img"
-                                                            />
-                                                        </a>
-                                                        <div className="product-details">
-                                                            <h5 className="product-name">
-                                                                <a href="#">Dining Solutions Soap</a>
-                                                            </h5>
-                                                            <div className="variations">
-                                                                <span className="attribute_color">
-                                                                    <a href="#">Black</a>
-                                                                </span>
-                                                                ,
-                                                                <span className="attribute_size">
-                                                                    <a href="#">300ml</a>
-                                                                </span>
-                                                            </div>
-                                                            <span className="product-price">
-                                                                <span className="price">
-                                                                    <span>$45</span>
-                                                                </span>
-                                                            </span>
-                                                            <span className="product-quantity">(x1)</span>
-                                                            <div className="product-remove">
-                                                                <a href="">
-                                                                    <i className="fa fa-trash-o" aria-hidden="true" />
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div className="subtotal">
-                                                    <span className="total-title">Subtotal: </span>
-                                                    <span className="total-price">
-                                                        <span className="Price-amount">$135</span>
-                                                    </span>
-                                                </div>
-                                                <div className="actions">
-                                                    <a
-                                                        className="button button-viewcart"
-                                                        href="shoppingcart.html"
-                                                    >
-                                                        <span>View Bag</span>
-                                                    </a>
-                                                    <a
-                                                        href="checkout.html"
-                                                        className="button button-checkout"
-                                                    >
-                                                        <span>Checkout</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <HeaderMinicart/>
                                     <div className="block-account block-header stelina-dropdown">
                                         <a href="javascript:void(0);" data-stelina="stelina-dropdown">
                                             <span className="flaticon-user" />
