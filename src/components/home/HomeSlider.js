@@ -1,6 +1,16 @@
 import React from 'react';
-
+// import OwlCarousel from 'react-owl-carousel';
+import Slider from "react-slick";
 function HomeSlider(props) {
+    var settings = {
+        "autoplay":true, 
+        "autoplaySpeed":9000, 
+        "arrows":false, 
+        "dots":true, 
+        "infinite":true, 
+        "speed":1000, 
+        "rows":1
+    };
     return (
         <>
             <div className="home-slider-banner">
@@ -8,10 +18,9 @@ function HomeSlider(props) {
                     <div className="row10">
                         <div className="col-lg-8 silider-wrapp">
                             <div className="home-slider">
-                                <div
+                                <Slider 
                                     className="slider-owl owl-slick equal-container nav-center"
-                                    data-slick='{"autoplay":true, "autoplaySpeed":9000, "arrows":false, "dots":true, "infinite":true, "speed":1000, "rows":1}'
-                                    data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":1}}]'
+                                    {...settings}
                                 >
                                     <div className="slider-item style7">
                                         <div className="slider-inner equal-element">
@@ -70,7 +79,7 @@ function HomeSlider(props) {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Slider >
                             </div>
                         </div>
                         <div className="col-lg-4 banner-wrapp">
