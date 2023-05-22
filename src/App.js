@@ -10,8 +10,6 @@ import ShoppingCart from "./pages/Cart";
 import Register from "./pages/Register";
 
 
-
-
 function App() {
   return (
     <>

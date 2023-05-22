@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
-import LoginModel from '../../models/LoginModel';
+import UserModel from '../../models/UserModel';
 
 const rules = Yup.object().shape({
   email: Yup.string().required('Vui lòng nhập Email!'),
@@ -19,7 +19,7 @@ function LoginForm() {
   const navigate = useNavigate();
 
   const handleSubmit = (values) => {
-    LoginModel.login(values)
+    UserModel.login(values)
       .then((res) => {
         localStorage.setItem('token', res.access_token);
         localStorage.setItem('user', JSON.stringify(res.user));
