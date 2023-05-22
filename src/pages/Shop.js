@@ -23,7 +23,7 @@ function Shop(props) {
     return (
         <LayoutMaster>
             <>
-                <Breadcrumb />
+                <Breadcrumb page_title="Shop" />
                 <div className="row">
                     <div className="content-area shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div className="site-main">
