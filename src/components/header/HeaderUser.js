@@ -14,7 +14,7 @@ function HeaderUser(props) {
         // Xử lý khi đăng xuất thành công
         Swal.fire({
           icon: 'success',
-          title: 'dANG XUAT THANH CONG',
+          title: 'Đăng xuất thành công',
           showConfirmButton: false,
           timer: 1500,
         }).then(() => {
