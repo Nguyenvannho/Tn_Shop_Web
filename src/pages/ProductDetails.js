@@ -4,15 +4,20 @@ import Header from "../includes/Header";
 import ProductModel from "../models/ProductModel";
 import LayoutMaster from "../layouts/LayoutMaster";
 import Breadcrumb from "../components/global/Breadcrumb";
+import { useDispatch, useSelector } from "react-redux";
+import { SET_CART } from "../redux/action";
 
 function ProductDetail(props) {
-  const { id } = useParams();
-  const [product, setProduct] = useState({
-    name: "",
-    price: "",
-    description: "",
-    image: "",
-  });
+    const cart = useSelector(state => state.cart);//[]
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    const [count,setCount] = useState(1)
+    const [product, setProduct] = useState({
+        name: "",
+        price: "",
+        description: "",
+        image: "",
+    });
 
   useEffect(() => {
     ProductModel.find(id)
@@ -25,118 +30,82 @@ function ProductDetail(props) {
       });
   }, []);
 
-  return (
-    <LayoutMaster>
-      <Breadcrumb page_title={product.name} />
-      <div className="row">
-        <div className="content-area content-details full-width col-lg-9 col-md-8 col-sm-12 col-xs-12">
-          <div className="site-main">
-            <div className="details-product">
-              <div className="details-thumd">
-                <div className="image-preview-container image-thick-box image_preview_container">
-                  <img
-                    id="img_zoom"
-                    data-zoom-image="/images/details-item-1.jpg"
-                    src={product.image}
-                    alt="img"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="details-infor">
-              <h1 className="product-title">{product.name}</h1>
-              <div className="stars-rating">
-                <div className="star-rating">
-                  <span className="star-5" />
-                </div>
-                <div className="count-star">(7)</div>
-              </div>
-              <div className="availability">Tình trạng : còn hàng</div>
-              <div className="price">
-                <span>{product.price_format} VNĐ</span>
-              </div>
-              <div className="product-details-description">
-                <ul>
-                  <li>Thương hiệu</li>
-                  <li>Imported</li>
-                </ul>
-              </div>
-              <div className="variations">
-                <div id="information" className="tab-panel">
-                  <Link to="/cart" className="cart-button">
-                    <span className="cart-icon">🛒</span>
-                    <span className="cart-text">Thêm vào giỏ hàng</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="tab-details-product">
-            <ul className="tab-link">
-              <li className="active">
-                <a
-                  data-toggle="tab"
-                  aria-expanded="true"
-                  href="#product-descriptions"
-                >
-                  Mô tả sản phẩm :
-                </a>
-              </li>
-            </ul>
-            <div className="tab-container">
-              <div id="product-descriptions" className="tab-panel active">
-                <p>{product.description}</p>
-              </div>
-              <div id="information" className="tab-panel">
-                <table className="table table-bordered">
-                  <tbody>
-                    <tr>
-                      <td>Size</td>
-                      <td> XS / S / M / L</td>
-                    </tr>
-                    <tr>
-                      <td>Color</td>
-                      <td>White/ Black/ Teal/ Brown</td>
-                    </tr>
-                    <tr>
-                      <td>Properties</td>
-                      <td>Colorful Dress</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div id="reviews" className="tab-panel">
-                <div className="reviews-tab">
-                  <div className="comments">
-                    <h2 className="reviews-title">
-                      1 review for
-                      <span>Glorious Eau</span>
-                    </h2>
-                    <ol className="commentlist">
-                      <li className="conment">
-                        <div className="conment-container">
-                          <a href="#" className="avatar">
-                            <img src="/images/avartar.png" alt="img" />
-                          </a>
-                          <div className="comment-text">
+
+    const handleAddToCart = () =>{
+        let item = { 
+            product_id: id, 
+            quantity: count,
+            product: product
+        };
+        let update = false;
+        for (let index = 0; index < cart.length; index++) {
+            const element = cart[index];
+            if(element.product_id == id){
+                update = true;
+                cart[index].quantity =  cart[index].quantity + count
+            }
+        }
+        if(update) {
+            var newCart = [...cart]
+        }else {
+            var newCart = [...cart, item]
+        }
+        localStorage.setItem('cart',JSON.stringify(newCart))
+        dispatch({ type: SET_CART, payload: newCart });
+
+    }
+
+    return (
+        <LayoutMaster>
+            <Breadcrumb page_title={product.name} />
+            <div className="row">
+                <div className="content-area content-details full-width col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                    <div className="site-main">
+                        <div className="details-product">
+                            <div className="details-thumd">
+                                <div className="image-preview-container image-thick-box image_preview_container">
+                                    <img
+                                        id="img_zoom"
+                                        data-zoom-image="/images/details-item-1.jpg"
+                                        src={product.image}
+                                        alt="img"
+                                    />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className="details-infor">
+                            <h1 className="product-title">{product.name}</h1>
+
                             <div className="stars-rating">
                               <div className="star-rating">
                                 <span className="star-5" />
                               </div>
                               <div className="count-star">(1)</div>
                             </div>
-                            <p className="meta">
-                              <strong className="author">Cobus Bester</strong>
-                              <span>-</span>
-                              <span className="time">June 7, 2013</span>
-                            </p>
-                            <div className="description">
-                              <p>
-                                Simple and effective design. One of my
-                                favorites.
-                              </p>
+
+                            <div className="group-button">
+
+                                <div className="quantity-add-to-cart">
+                                    <div className="quantity">
+                                        <div className="control">
+                                            <a className="btn-number qtyminus quantity-minus" 
+                                                onClick={() => setCount(count-1)}>
+                                                -
+                                            </a>
+                                            <input
+                                                type="text"
+                                                value={count}
+                                                className="input-qty qty"
+                                            />
+                                            <a onClick={() => setCount(count+1)} className="btn-number qtyplus quantity-plus">
+                                                +
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <button onClick={handleAddToCart} className="single_add_to_cart_button button">Add to cart</button>
+                                </div>
                             </div>
-                          </div>
                         </div>
                       </li>
                     </ol>
