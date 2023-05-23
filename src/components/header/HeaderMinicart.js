@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
@@ -86,10 +87,35 @@ function HeaderMinicart(props) {
                             <span>Checkout</span>
                         </a>
                     </div>
+
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
+          <div className="subtotal">
+            <span className="total-title">Subtotal: </span>
+            <span className="total-price">
+              <span className="Price-amount">$135</span>
+            </span>
+          </div>
+          <div className="actions">
+            <Link
+              to="/productdetail/1"
+              className="button button-checkout small-button"
+            >
+              <span>Xem sản phẩm</span>
+            </Link>
+            <Link
+              to="/checkout"
+              className="button button-checkout small-button active"
+            >
+              <span>Thanh toán</span>
+            </Link>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default HeaderMinicart;

@@ -12,31 +12,11 @@ function Header(props) {
                 <div className="top-bar">
                     <div className="container">
                         <div className="top-bar-left">
-                            <div className="header-message">Welcome to our online store!</div>
+                            <div className="header-message">Chào mừng đến với cửa hàng trực tuyến của chúng tôi!</div>
                         </div>
                         <div className="top-bar-right">
                             <div className="header-language">
-                                <div className="stelina-language stelina-dropdown">
-                                    <a
-                                        href="#"
-                                        className="active language-toggle"
-                                        data-stelina="stelina-dropdown"
-                                    >
-                                        <span>English (USD)</span>
-                                    </a>
-                                    <ul className="stelina-submenu">
-                                        <li className="switcher-option">
-                                            <a href="#">
-                                                <span>French (EUR)</span>
-                                            </a>
-                                        </li>
-                                        <li className="switcher-option">
-                                            <a href="#">
-                                                <span>Japanese (JPY)</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                
                             </div>
                             <HeaderUser/>
                         </div>
@@ -250,28 +230,6 @@ function Header(props) {
                             <a href="#" className="close">
                                 <i className="fa fa-times" aria-hidden="true" />
                             </a>
-                            <div className="block-sub-item">
-                                <h5 className="block-item-title">Currency</h5>
-                                <form className="currency-form stelina-language">
-                                    <ul className="stelina-language-wrap">
-                                        <li className="active">
-                                            <a href="#">
-                                                <span>English (USD)</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span>French (EUR)</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span>Japanese (JPY)</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </form>
-                            </div>
                         </div>
                     </div>
 
