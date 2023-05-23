@@ -4,9 +4,14 @@ import Header from "../includes/Header";
 import ProductModel from '../models/ProductModel';
 import LayoutMaster from "../layouts/LayoutMaster";
 import Breadcrumb from "../components/global/Breadcrumb";
+import { useDispatch, useSelector } from "react-redux";
+import { SET_CART } from "../redux/action";
 
 function ProductDetail(props) {
+    const cart = useSelector(state => state.cart);//[]
+    const dispatch = useDispatch();
     const { id } = useParams();
+    const [count,setCount] = useState(1)
     const [product, setProduct] = useState({
         name: "",
         price: "",
@@ -25,11 +30,33 @@ function ProductDetail(props) {
             });
     }, []);
 
-    ;
+    const handleAddToCart = () =>{
+        let item = { 
+            product_id: id, 
+            quantity: count,
+            product: product
+        };
+        let update = false;
+        for (let index = 0; index < cart.length; index++) {
+            const element = cart[index];
+            if(element.product_id == id){
+                update = true;
+                cart[index].quantity =  cart[index].quantity + count
+            }
+        }
+        if(update) {
+            var newCart = [...cart]
+        }else {
+            var newCart = [...cart, item]
+        }
+        localStorage.setItem('cart',JSON.stringify(newCart))
+        dispatch({ type: SET_CART, payload: newCart });
+
+    }
 
     return (
         <LayoutMaster>
-            <Breadcrumb page_title={product.name}/>
+            <Breadcrumb page_title={product.name} />
             <div className="row">
                 <div className="content-area content-details full-width col-lg-9 col-md-8 col-sm-12 col-xs-12">
                     <div className="site-main">
@@ -61,25 +88,29 @@ function ProductDetail(props) {
                             <div className="price">
                                 <span>{product.price_format} VNĐ</span>
                             </div>
-                            <div className="product-details-description">
-                                <ul>
-                                    <li>Vestibulum tortor quam</li>
-                                    <li>Imported</li>
-                                    <li>Art.No. 06-7680</li>
-                                </ul>
-                            </div>
-                            <div className="variations">
-                                <div className="attribute attribute_color">
-                                    <div className="color-text text-attribute">Color:</div>
-                                    <div className="list-color list-item">
-                                        <a href="#" className="color1" />
-                                        <a href="#" className="color2" />
-                                        <a href="#" className="color3 active" />
-                                        <a href="#" className="color4" />
-                                    </div>
-                                </div>
+                            <div className="group-button">
 
+                                <div className="quantity-add-to-cart">
+                                    <div className="quantity">
+                                        <div className="control">
+                                            <a className="btn-number qtyminus quantity-minus" 
+                                                onClick={() => setCount(count-1)}>
+                                                -
+                                            </a>
+                                            <input
+                                                type="text"
+                                                value={count}
+                                                className="input-qty qty"
+                                            />
+                                            <a onClick={() => setCount(count+1)} className="btn-number qtyplus quantity-plus">
+                                                +
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <button onClick={handleAddToCart} className="single_add_to_cart_button button">Add to cart</button>
+                                </div>
                             </div>
+
 
                         </div>
                     </div>
