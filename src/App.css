@@ -1,3 +1,40 @@
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  /* Các kiểu dáng chung cho nút */
+}
+
+.button-checkout {
+  /* Kiểu dáng riêng cho nút Checkout */
+}
+.cart-icon {
+  font-size: 1.2em;
+  margin-right: 0.5em;
+}
+.cart-text {
+  display: inline-block;
+  padding: 5px;
+  border: 2px solid #996633;
+  background-color: #996633;
+  color: white;
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+.small-button {
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+.active {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
 .error {
   color: red;
 }
