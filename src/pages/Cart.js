@@ -7,45 +7,16 @@ import Breadcrumb from "../components/global/Breadcrumb";
 
 
 function Cart(props) {
-    const [products, setProduct] = useState([]);
-    const totalAll = products.reduce((total, product) => {
-        return total + product.price * product.quantity;
-    }, 0);
-    const { id } = useParams();
 
     useEffect(() => {
-        CartModel.getAll()
-            .then((res) => {
-                setProduct(res);
-                console.log(res);
-            })
-            .catch((err) => {
-                throw err;
-            });
 
     }, []);
 
     function handleQuantityChange(productId, newQuantity) {
-        const updatedProducts = products.map((product) => {
-            if (product.id === productId) {
-                return { ...product, quantity: newQuantity };
-            }
-            return product;
-        });
-        setProduct(updatedProducts);
+
     }
     function handleDelete(id) {
-        // Gọi API xoá sản phẩm theo id
-        CartModel.remove(id)
-            .then(() => {
-                handleAddSuccess();
-                // Nếu xoá thành công, cập nhật lại danh sách sản phẩm trong state
-                setProduct(products.filter((product) => product.id !== id));
-            })
-            .catch((error) => {
-                console.log(error);
-                alert("Có lỗi khi xoá sản phẩm");
-            });
+
     }
     const handleAddSuccess = () => {
         Swal.fire({
@@ -81,7 +52,7 @@ function Cart(props) {
                                                 </thead>
                                                 <tbody>
 
-                                                    <tr key={product.id}>
+                                                    {/* <tr key={product.id}>
                                                         <th>{product.id}</th>
                                                         <th>
                                                             {" "}
@@ -291,7 +262,7 @@ function Cart(props) {
                                                                 <span className="total-price">$95</span>
                                                             </div>
                                                         </td>
-                                                    </tr>
+                                                    </tr> */}
                                                 </tbody>
 
                                             </table>
