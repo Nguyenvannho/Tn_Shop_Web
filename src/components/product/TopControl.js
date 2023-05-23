@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function TopControl(props) {
 
@@ -34,11 +35,11 @@ function TopControl(props) {
             </form>
             <div className="grid-view-mode">
                 <div className="inner">
-                    <a href="listproducts.html" className="modes-mode mode-list">
+                    <Link href="listproducts.html" className="modes-mode mode-list">
                         <span />
                         <span />
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                         href="gridproducts.html"
                         className="modes-mode mode-grid  active"
                     >
@@ -46,7 +47,7 @@ function TopControl(props) {
                         <span />
                         <span />
                         <span />
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

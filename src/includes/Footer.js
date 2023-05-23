@@ -117,7 +117,7 @@ function Footer(props) {
                                         </ul>
                                     </div>
                                     <div className="coppyright">
-                                        Copyright © 2020
+                                        Copyright © 2023
                                         <a href="#">Stelina</a>. All rights reserved
                                     </div>
                                 </div>

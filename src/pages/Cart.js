@@ -37,7 +37,7 @@ function Cart(props) {
                                 <h3 className="custom_blog_title">Shopping Cart</h3>
                                 <div className="page-main-content">
                                     <div className="shoppingcart-content">
-                                        <form action="shoppingcart.html" className="cart-form">
+                                        <form action="" className="cart-form">
                                             <table className="shop_table">
                                                 <thead>
                                                     <tr>
