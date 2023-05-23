@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
@@ -22,8 +21,8 @@ function HeaderMinicart(props) {
     const handleRemove = (index) => {
         alert(index)
         let newCart = [...cart]
-        newCart = newCart.splice(index, 1)
-        localStorage.setItem('cart', JSON.stringify(newCart))
+        newCart = newCart.splice(index,1)
+        localStorage.setItem('cart',JSON.stringify(newCart))
         dispatch({ type: SET_CART, payload: newCart });
     }
     return (
@@ -37,33 +36,33 @@ function HeaderMinicart(props) {
                     <h3 className="title">Shopping Cart</h3>
                     <ul className="minicart-items">
                         {
-                            cart.map((cart_item, key) => (
-                                <li key={key} className="product-cart mini_cart_item">
-                                    <a href="#" className="product-media">
-                                        <img
-                                            src={cart_item.product.image}
-                                            alt="img"
-                                        />
-                                    </a>
-                                    <div className="product-details">
-                                        <h5 className="product-name">
-                                            <a href="#">{cart_item.product.name}</a>
-                                        </h5>
+                        cart.map((cart_item, key) => (
+                            <li key={key} className="product-cart mini_cart_item">
+                                <a href="#" className="product-media">
+                                    <img
+                                        src={cart_item.product.image}
+                                        alt="img"
+                                    />
+                                </a>
+                                <div className="product-details">
+                                    <h5 className="product-name">
+                                        <a href="#">{cart_item.product.name}</a>
+                                    </h5>
 
-                                        <span className="product-price">
-                                            <span className="price">
-                                                <span>{cart_item.product.price * cart_item.quantity}</span>
-                                            </span>
+                                    <span className="product-price">
+                                        <span className="price">
+                                            <span>{cart_item.product.price * cart_item.quantity}</span>
                                         </span>
-                                        <span className="product-quantity">(x{cart_item.quantity})</span>
-                                        <div className="product-remove">
-                                            <Link onClick={() => handleRemove(key)}>
-                                                <i className="fa fa-trash-o" aria-hidden="true" />
-                                            </Link>
-                                        </div>
+                                    </span>
+                                    <span className="product-quantity">(x{cart_item.quantity})</span>
+                                    <div className="product-remove">
+                                        <Link onClick={() => handleRemove(key)}>
+                                            <i className="fa fa-trash-o" aria-hidden="true" />
+                                        </Link>
                                     </div>
-                                </li>
-                            ))
+                                </div>
+                            </li>
+                        ))
                         }
 
                     </ul>
@@ -87,33 +86,9 @@ function HeaderMinicart(props) {
                             <span>Checkout</span>
                         </a>
                     </div>
-
                 </div>
             </div>
-
-            <div className="subtotal">
-                <span className="total-title">Subtotal: </span>
-                <span className="total-price">
-                    <span className="Price-amount">$135</span>
-                </span>
-            </div>
-
-            <div className="actions">
-                <Link
-                    to="/productdetail/1"
-                    className="button button-checkout small-button"
-                >
-                    <span>Xem sản phẩm</span>
-                </Link>
-                <Link
-                    to="/checkout"
-                    className="button button-checkout small-button active"
-                >
-                    <span>Thanh toán</span>
-                </Link>
-            </div>
-
-        </div >
+        </div>
     );
 }
 
