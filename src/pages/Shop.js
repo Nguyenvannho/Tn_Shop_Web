@@ -8,17 +8,20 @@ import TopControl from '../components/product/TopControl';
 
 function Shop(props) {
     const [products, setProducts] = useState([]);
+    const [page, setPage] = useState(1);
+    const [pageData, setPageData] = useState({});
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/products')
+        axios.get('http://127.0.0.1:8000/api/products?page='+page)
             .then(res => {
                 // console.log(res.data.data); // Kiểm tra định dạng dữ liệu trả về từ API
-                setProducts(res.data.data); // Gán dữ liệu sản phẩm cho trạng thái products
+                setProducts(res.data.data);
+                setPageData(res.data.meta) // Gán dữ liệu sản phẩm cho trạng thái products
             })
             .catch(error => {
                 console.error('Error fetching products:', error);
             });
-    }, []);
+    }, [page]);
 
     return (
         <LayoutMaster>
@@ -34,7 +37,7 @@ function Shop(props) {
                                     <ProductItem key={key} product={product} />
                                 ))}
                             </ul>
-                            <Pagination />
+                            <Pagination pageData={pageData} setPage={setPage}/>
                         </div>
                     </div>
                 </div>
