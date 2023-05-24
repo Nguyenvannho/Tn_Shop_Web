@@ -27,7 +27,6 @@ const Login = () => {
 				</div>
 			</div>
 
-
 		</LayoutMaster>
 	);
 };
