@@ -21,9 +21,7 @@ function Checkout(props) {
                                 </div>
                                 <YourOrder/>
                             </div>
-                            {/* <a href="#" className="button button-payment">
-                                Payment
-                            // </a> */}
+                           
                         </div>
                     </div>
                 </div>

@@ -18,8 +18,6 @@ function ProductItem(props) {
                         <Link to={'/productdetail/' + product.id}>
                             <img src={product.image} alt="img" />
                         </Link>
-                        
-
                     </div>
                 </div>
                 <div className="product-info">
