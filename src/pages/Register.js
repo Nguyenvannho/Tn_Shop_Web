@@ -15,7 +15,7 @@ function Register(props) {
 							<div className="row">
 								<div className="col-lg-12">
 									<div className="login-item">
-										<h5 className="title-login">Đăng ký tài khoản của bạn</h5>
+										<h2 className="title-login"><strong>Đăng ký tài khoản của bạn</strong></h2>
 										<RegisterForm/>
 									</div>
 								</div>
