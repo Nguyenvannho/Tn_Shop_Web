@@ -1,4 +1,5 @@
 import axios from "axios";
+
 class CartModel {
     constructor(){
         this.api_url = 'http://127.0.0.1:8000/api/carts';
@@ -6,7 +7,7 @@ class CartModel {
     getAll(){
         return new Promise( (resolve, reject) => {
             axios
-            .get(this.api_url+'carts')
+            .get(this.api_url)
             .then(res => {
                 resolve(res.data);
             })
@@ -15,10 +16,11 @@ class CartModel {
             });
         });
     }
-    addtocart(data){
+
+    add_to_cart(data){
         return new Promise( (resolve, reject) => {
             axios
-            .post(this.api_url+'add_to_cart',data )
+            .post(this.api_url,data )
             .then(res => {
                 resolve(res.data);
             })
@@ -27,6 +29,7 @@ class CartModel {
             });
         });
     }
+    
     update(id,data){
         return new Promise( (resolve, reject) => {
             axios
@@ -42,9 +45,8 @@ class CartModel {
     remove(id){
         return new Promise( (resolve, reject) => {
             axios
-            .delete(this.api_url+'remove_cart/'+id)
+            .delete(this.api_url+'/'+'remove_cart/'+id)
             .then(res => {
-                
                 resolve(res.data);
             })
             .catch(err => {
@@ -52,5 +54,7 @@ class CartModel {
             });
         });
     }
+
+
 }
 export default new CartModel();
