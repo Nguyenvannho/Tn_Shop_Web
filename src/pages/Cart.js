@@ -1,289 +1,178 @@
-import React, { useEffect, useState } from "react";
-import CartModel from "../models/CartModel";
-import LayoutMaster from '../layouts/LayoutMaster';
-import Swal from "sweetalert2";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import LayoutMaster from "../layouts/LayoutMaster";
 import Breadcrumb from "../components/global/Breadcrumb";
-
-
-
+import { Link } from "react-router-dom";
+import { FaCheck } from "react-icons/fa";
+import { SET_CART } from "../redux/action";
+import { NumericFormat } from "react-number-format";
 function Cart(props) {
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const [cartTotal, setCartTotal] = useState(0);
+  const [isRemoving, setIsRemoving] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
-    useEffect(() => {
+  useEffect(() => {
+    let total = 0;
+    cart.map((cartItem, index) => {
+      total += cartItem.product.price * cartItem.quantity;
+    });
+    setCartTotal(total);
+  }, [cart]);
 
-    }, []);
+  const handleRemove = (index) => {
+    const newCart = [...cart];
+    newCart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    dispatch({
+      type: SET_CART,
+      payload: newCart,
+    });
+  };
 
-    function handleQuantityChange(productId, newQuantity) {
+  const handleQuantityChange = (e) => {
+    const id = e.target.id;
+    const qty = e.target.value;
+    const newCart = [...cart];
+    newCart[id].quantity = qty;
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    dispatch({
+      type: SET_CART,
+      payload: newCart,
+    });
+  };
 
-    }
-    function handleDelete(id) {
+  return (
+    <LayoutMaster>
+      <Breadcrumb page_title="Cart" />
 
-    }
-    const handleAddSuccess = () => {
-        Swal.fire({
-            icon: 'success',
-            title: 'Xoá sản phẩm thành công',
-            text: 'Dữ liệu đã xoá vĩnh viễn ...!!!',
-        });
-    };
+      <div className="row">
+        <div className="main-content-cart main-content col-sm-12">
+          <h3 className="custom_blog_title">Shopping Cart</h3>
 
-    return (
-        <LayoutMaster>
-            <div className="site-content">
-                <main className="site-main  main-container no-sidebar">
-                    <div className="container">
-                        <Breadcrumb page_title="Cart" />
-                        <div className="row">
-                            <div className="main-content-cart main-content col-sm-12">
-                                <h3 className="custom_blog_title">Shopping Cart</h3>
-                                <div className="page-main-content">
-                                    <div className="shoppingcart-content">
-                                        <form action="" className="cart-form">
-                                            <table className="shop_table">
-                                                <thead>
-                                                    <tr>
-                                                        <th className="product-id">STT</th>
-                                                        <th className="product-image">Hình Ảnh</th>
-                                                        <th className="product-name">Sản Phẩm</th>
-                                                        <th className="product-price"> Giá</th>
-                                                        <th className="product-quantity">Số Lượng</th>
-                                                        <th className="product-quantity">Xoá Sản Phẩm</th>
-                                                    </tr>
-
-                                                </thead>
-                                                <tbody>
-
-                                                    {/* <tr key={product.id}>
-                                                        <th>{product.id}</th>
-                                                        <th>
-                                                            {" "}
-                                                            <img
-                                                                className="mini-img"
-                                                                src={`${product.image}`}
-                                                                alt="img"
-                                                            />
-                                                        </th>
-                                                        <th>{product.name}</th>
-                                                        <th>{product.price.toLocaleString('vi-VN')}.VNĐ</th>
-                                                        <a href="#">
-                                                            <img
-                                                                src="/images/cart-item-2.jpg"
-                                                                alt="img"
-                                                                className="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                                            />
-                                                        </a>
-
-                                                        <th>
-                                                            <input
-                                                                type="number"
-                                                                name="qty"
-                                                                id={`quantity-${product.id}`}
-                                                                value={product.quantity}
-                                                                min="1"
-                                                                onChange={(e) =>
-                                                                    handleQuantityChange(product.id, e.target.value)
-                                                                }
-                                                            />
-                                                        </th>
-
-                                                        <th>
-                                                            <button type="button" onClick={() => handleDelete(product.id)}>Xoá</button>
-                                                        </th>
-
-
-                                                        <td className="product-quantity" data-title="Quantity">
-                                                            <div className="quantity">
-                                                                <div className="control">
-                                                                    <a
-                                                                        className="btn-number qtyminus quantity-minus"
-                                                                        href="#"
-                                                                    >
-                                                                        -
-                                                                    </a>
-                                                                    <input
-                                                                        type="text"
-                                                                        data-step={1}
-                                                                        data-min={0}
-                                                                        defaultValue={1}
-                                                                        title="Qty"
-                                                                        className="input-qty qty"
-                                                                        size={4}
-                                                                    />
-                                                                    <a
-                                                                        href="#"
-                                                                        className="btn-number qtyplus quantity-plus"
-                                                                    >
-                                                                        +
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="product-price" data-title="Price">
-                                                            <span className="woocommerce-Price-amount amount">
-                                                                <span className="woocommerce-Price-currencySymbol">
-                                                                    $
-                                                                </span>
-                                                                45
-                                                            </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className="cart_item">
-                                                        <td className="product-remove">
-                                                            <a href="#" className="remove" />
-                                                        </td>
-                                                        <td className="product-thumbnail">
-                                                            <a href="#">
-                                                                <img
-                                                                    src="/images/cart-item-3.jpg"
-                                                                    alt="img"
-                                                                    className="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                                                />
-                                                            </a>
-                                                        </td>
-                                                        <td className="product-name" data-title="Product">
-                                                            <a href="#" className="title">
-                                                                Square neck top
-                                                            </a>
-                                                            <span className="attributes-select attributes-color">
-                                                                White,
-                                                            </span>
-                                                            <span className="attributes-select attributes-size">
-                                                                M
-                                                            </span>
-                                                        </td>
-                                                        <td className="product-quantity" data-title="Quantity">
-                                                            <div className="quantity">
-                                                                <div className="control">
-                                                                    <a
-                                                                        className="btn-number qtyminus quantity-minus"
-                                                                        href="#"
-                                                                    >
-                                                                        -
-                                                                    </a>
-                                                                    <input
-                                                                        type="text"
-                                                                        data-step={1}
-                                                                        data-min={0}
-                                                                        defaultValue={1}
-                                                                        title="Qty"
-                                                                        className="input-qty qty"
-                                                                        size={4}
-                                                                    />
-                                                                    <a
-                                                                        href="#"
-                                                                        className="btn-number qtyplus quantity-plus"
-                                                                    >
-                                                                        +
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="product-price" data-title="Price">
-                                                            <span className="woocommerce-Price-amount amount">
-                                                                <span className="woocommerce-Price-currencySymbol">
-                                                                    $
-                                                                </span>
-                                                                45
-                                                            </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className="cart_item">
-                                                        <td className="product-remove">
-                                                            <a href="#" className="remove" />
-                                                        </td>
-                                                        <td className="product-thumbnail">
-                                                            <a href="#">
-                                                                <img
-                                                                    src="/images/cart-item-1.jpg"
-                                                                    alt="img"
-                                                                    className="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                                                />
-                                                            </a>
-                                                        </td>
-                                                        <td className="product-name" data-title="Product">
-                                                            <a href="#" className="title">
-                                                                Melody Eau
-                                                            </a>
-                                                            <span className="attributes-select attributes-color">
-                                                                Brown,
-                                                            </span>
-                                                            <span className="attributes-select attributes-size">
-                                                                XS
-                                                            </span>
-                                                        </td>
-                                                        <td className="product-quantity" data-title="Quantity">
-                                                            <div className="quantity">
-                                                                <div className="control">
-                                                                    <a
-                                                                        className="btn-number qtyminus quantity-minus"
-                                                                        href="#"
-                                                                    >
-                                                                        -
-                                                                    </a>
-                                                                    <input
-                                                                        type="text"
-                                                                        data-step={1}
-                                                                        data-min={0}
-                                                                        defaultValue={1}
-                                                                        title="Qty"
-                                                                        className="input-qty qty"
-                                                                        size={4}
-                                                                    />
-                                                                    <a
-                                                                        href="#"
-                                                                        className="btn-number qtyplus quantity-plus"
-                                                                    >
-                                                                        +
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="product-price" data-title="Price">
-                                                            <span className="woocommerce-Price-amount amount">
-                                                                <span className="woocommerce-Price-currencySymbol">
-                                                                    $
-                                                                </span>
-                                                                45
-                                                            </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="actions">
-                                                            <div className="coupon">
-                                                                <label className="coupon_code">Coupon Code:</label>
-                                                                <input
-                                                                    type="text"
-                                                                    className="input-text"
-                                                                    placeholder="Promotion code here"
-                                                                />
-                                                                <a href="#" className="button" />
-                                                            </div>
-                                                            <div className="order-total">
-                                                                <span className="title">Total Price:</span>
-                                                                <span className="total-price">$95</span>
-                                                            </div>
-                                                        </td>
-                                                    </tr> */}
-                                                </tbody>
-
-                                            </table>
-                                        </form>
-                                        <div className="control-cart">
-                                            <button className="button btn-continue-shopping">
-                                                Continue Shopping
-                                            </button>
-                                            <button className="button btn-cart-to-checkout">
-                                                Checkout
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
+          <div className="page-main-content">
+            <div className="shoppingcart-content">
+              {cart.length == 0 ? (
+                <table className="cart-table">
+                  <tr>
+                    <td colSpan={6} style={{ textAlign: "center" }}>
+                      Giỏ hàng trống, Nhấn vào
+                      <Link to="/shop"> đây </Link>
+                      để tiếp tục mua hàng
+                    </td>
+                  </tr>
+                </table>
+              ) : (
+                <table className="cart-table">
+                  <thead>
+                    <tr>
+                      <th>Ảnh</th>
+                      <th>Sản phẩm</th>
+                      <th>Giá tiền</th>
+                      <th>Số lượng</th>
+                      <th>Thành tiền</th>
+                      <th>Thao tác</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cart.map((CartItem, index) => (
+                      <tr key={index}>
+                        <td>
+                          <img
+                            width={50}
+                            src={CartItem.product.image}
+                            alt={CartItem.product.name}
+                            className="product-image"
+                          />
+                        </td>
+                        <td>{CartItem.product.name}</td>
+                        <td>{CartItem.product.price_format} VNĐ</td>
+                        <td width={100}>
+                          <input
+                            className="form-control"
+                            min={1}
+                            type="number"
+                            id={index}
+                            defaultValue={CartItem.quantity}
+                            onChange={handleQuantityChange}
+                          />
+                        </td>
+                        <td>
+                          <NumericFormat
+                            value={CartItem.product.price * CartItem.quantity}
+                            allowLeadingZeros
+                            thousandSeparator=","
+                            displayType="text"
+                          />{" "}
+                          VNĐ
+                        </td>
+                        <td>
+                          {isRemoving ? (
+                            <span>Xóa...</span>
+                          ) : (
+                            <button
+                              className="remove-button"
+                              onClick={() => handleRemove(index)}
+                            >
+                              Xóa
+                            </button>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colSpan={6} style={{ textAlign: "right" }}>
+                        <strong>Tổng tiền: </strong>
+                        <NumericFormat
+                          value={cartTotal}
+                          allowLeadingZeros
+                          thousandSeparator=","
+                          displayType="text"
+                        />
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              )}
+              {
+                cart.length > 0 ? (
+                <div className="control-cart">
+                  <button className="button btn-continue-shopping">
+                    Continue Shopping
+                  </button>
+                  <button className="button btn-cart-to-checkout">
+                    Checkout
+                  </button>
+                </div>
+                ) : null
+              }
             </div>
-        </LayoutMaster>
-
-    );
+          </div>
+        </div>
+      </div>
+      {alertMessage && (
+        <div
+          className="alert-success"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            backgroundColor: "#D4EDDA",
+            border: "1px solid #C3E6CB",
+            borderRadius: "4px",
+            padding: "10px",
+            marginBottom: "10px",
+          }}
+        >
+          <FaCheck style={{ color: "#155724", marginRight: "10px" }} />
+          <span>{alertMessage}</span>
+        </div>
+      )}
+    </LayoutMaster>
+  );
 }
+
 export default Cart;
