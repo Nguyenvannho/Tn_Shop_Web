@@ -3,7 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
-import CheckOutModel from '../../models/CheckOutModel';
+import OrderModel from '../../models/OrderModel';
+import { useDispatch, useSelector } from "react-redux";
+
 
 const rules = Yup.object().shape({
   name: Yup.string().required('Mời nhập tên người nhận!'),
@@ -21,34 +23,30 @@ const initialValues = {
   note: ''
 };
 
-
-
 function CheckOutForm() {
   const navigate = useNavigate();
+  const cart = useSelector(state => state.cart);//[]
 
   const handleSubmit = (values) => {
-    CheckOutModel.login(values)
+    values.cart = cart
+    console.log(values);
+    OrderModel.checkout(values)
       .then((res) => {
-        localStorage.setItem('token', res.access_token);
-        localStorage.setItem('user', JSON.stringify(res.user));
-        navigate("/");
-        handleCheckOutSuccess();
+        Swal.fire({
+          icon: 'success',
+          title: 'Thanh toán thành công!',
+          showConfirmButton: false,
+          timer: 1500
+        });
       })
       .catch((err) => {
         Swal.fire({
-          icon: 'error',
-          title: 'Có lỗi xảy ra khi đăng nhập!',
-          text: err.message,
+          icon: 'success',
+          title: 'Thanh toán thẩt bại!',
+          showConfirmButton: false,
+          timer: 1500
         });
       });
-  };
-  const handleCheckOutSuccess = () => {
-    Swal.fire({
-      icon: 'success',
-      title: 'Đăng nhập thành công!',
-      showConfirmButton: false,
-      timer: 1500
-    });
   };
 
   return (
@@ -58,7 +56,7 @@ function CheckOutForm() {
       onSubmit={handleSubmit}
     >
       <Form className="checkout">
-    
+
         <h2 className="title-form"><strong>Địa chỉ giao hàng</strong></h2>
         <p className="form-row form-row-first">
           <label className="text" >Tên khách hàng*</label>

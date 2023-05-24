@@ -4,7 +4,7 @@ function YourOrder(props) {
     return (
         <div className="row-col-2 row-col">
         <div className="your-order">
-            <h3 className="title-form">Đơn Hàng Của Bạn</h3>
+            <h3 className="title-form">Đơn Hàng Của Tôi</h3>
             <ul className="list-product-order">
                 <li className="product-item-order">
                     <div className="product-thumb">
