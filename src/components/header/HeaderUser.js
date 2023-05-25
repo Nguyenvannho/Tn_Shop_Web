@@ -9,6 +9,7 @@ function HeaderUser(props) {
     // Gọi API đăng xuất
     UserModel.logout()
       .then((response) => {
+
         console.log(response);
         localStorage.removeItem('user');
         // Xử lý khi đăng xuất thành công
@@ -34,8 +35,8 @@ function HeaderUser(props) {
   };
 
 
-  let user = localStorage.getItem('user');
-  user = JSON.parse(user);
+  let user = UserModel.getCookie('user');
+  user = user ? JSON.parse(user) : '';
 
   if (user) {
     return (

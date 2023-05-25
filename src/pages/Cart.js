@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import { SET_CART } from "../redux/action";
 import { NumericFormat } from "react-number-format";
+
 function Cart(props) {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -29,6 +30,12 @@ function Cart(props) {
       type: SET_CART,
       payload: newCart,
     });
+    setIsRemoving(true);
+    setAlertMessage("Sản phẩm đã được xóa khỏi giỏ hàng thành công !.");
+    setTimeout(() => {
+      setIsRemoving(false);
+      setAlertMessage("");
+    }, 3000);
   };
 
   const handleQuantityChange = (e) => {
@@ -53,12 +60,27 @@ function Cart(props) {
 
           <div className="page-main-content">
             <div className="shoppingcart-content">
-              {cart.length == 0 ? (
+              {cart.length === 0 ? (
                 <table className="cart-table">
                   <tr>
-                    <td colSpan={6} style={{ textAlign: "center" }}>
+                    <td
+                      colSpan={6}
+                      style={{
+                        textAlign: "center",
+                        color: "#555",
+                        fontWeight: "bold",
+                      }}
+                    >
                       Giỏ hàng trống, Nhấn vào
-                      <Link to="/shop"> đây </Link>
+                      <Link
+                        to="/shop"
+                        style={{
+                          color: "#007bff",
+                          textDecoration: "underline",
+                        }}
+                      >
+                        đây
+                      </Link>
                       để tiếp tục mua hàng
                     </td>
                   </tr>
@@ -109,8 +131,10 @@ function Cart(props) {
                           VNĐ
                         </td>
                         <td>
-                          {isRemoving ? (
-                            <span>Xóa...</span>
+                          {isRemoving && index === cart.length - 1 ? (
+                            <span className="check-icon">
+                              <FaCheck />
+                            </span>
                           ) : (
                             <button
                               className="remove-button"
@@ -138,18 +162,16 @@ function Cart(props) {
                   </tfoot>
                 </table>
               )}
-              {
-                cart.length > 0 ? (
+              {cart.length > 0 && (
                 <div className="control-cart">
-                  <button className="button btn-continue-shopping">
-                    Continue Shopping
-                  </button>
-                  <button className="button btn-cart-to-checkout">
-                    Checkout
-                  </button>
+                  <Link to="/shop" className="button btn-continue-shopping">
+                    Quay lại trang shop
+                  </Link>
+                  <Link to="/checkout" className="button btn-cart-to-checkout">
+                    Đến nơi thanh toán
+                  </Link>
                 </div>
-                ) : null
-              }
+              )}
             </div>
           </div>
         </div>
@@ -160,6 +182,7 @@ function Cart(props) {
           style={{
             display: "flex",
             alignItems: "center",
+            justifyContent: "center",
             backgroundColor: "#D4EDDA",
             border: "1px solid #C3E6CB",
             borderRadius: "4px",
@@ -168,7 +191,9 @@ function Cart(props) {
           }}
         >
           <FaCheck style={{ color: "#155724", marginRight: "10px" }} />
-          <span>{alertMessage}</span>
+          <span style={{ color: "#155724", fontWeight: "bold" }}>
+            {alertMessage}
+          </span>
         </div>
       )}
     </LayoutMaster>

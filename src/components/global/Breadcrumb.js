@@ -10,7 +10,7 @@ function Breadcrumb(props) {
                 <div className="breadcrumb-trail breadcrumbs">
                     <ul className="trail-items breadcrumb">
                         <li className="trail-item trail-begin">
-                            <Link to={'/'}>Home</Link>
+                            <Link to={'/'}>Trang chủ</Link>
                         </li>
                         <li className="trail-item trail-end active">{page_title}</li>
                     </ul>
