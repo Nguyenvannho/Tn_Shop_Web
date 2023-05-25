@@ -71,9 +71,6 @@ function Header(props) {
                                 <div className="header-control">
                                     <HeaderMinicart/>
                                     <div className="block-account block-header stelina-dropdown">
-                                        <a href="javascript:void(0);" data-stelina="stelina-dropdown">
-                                            <span className="flaticon-user" />
-                                        </a>
                                         <div className="header-account stelina-submenu">
                                             <div className="header-user-form-tabs">
                                                 <ul className="tab-link">

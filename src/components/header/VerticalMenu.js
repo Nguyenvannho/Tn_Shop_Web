@@ -1,97 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CategoryModel from "../../models/CategoryModel";
 
 function VerticalMenu(props) {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    CategoryModel.getAll()
+      .then((res) => {
+        setCategories(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, []);
+  var settings = {
+    autoplay: false,
+    autoplaySpeed: 1000,
+    arrows: false,
+    dots: true,
+    infinite: false,
+    speed: 800,
+    slidesToShow: 4,
+  };
+
+  const menuActive = "vertical-wapper block-nav-categori";
+  const menuShowUp = "block-content verticalmenu-content";
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuClassActive, setMenuClassActive] = useState(menuActive);
+  const [menuClassShowUp, setMenuClassShowUp] = useState(menuShowUp);
+  const handleMenuClick = () => {
+    const checkMenuOpen = !menuOpen;
+    console.log(checkMenuOpen);
+    setMenuOpen(checkMenuOpen);
+
+    if (checkMenuOpen) {
+      setMenuClassActive(menuActive + " active");
+      setMenuClassShowUp(menuShowUp + " show-up");
+    } else {
+      setMenuClassActive(menuActive);
+      setMenuClassShowUp(menuShowUp);
+    }
+  };
   return (
-    <div className="vertical-wapper block-nav-categori">
-      <div className="block-title">
+    <div className={menuClassActive}>
+      <div className="block-title" id="123" onClick={handleMenuClick}>
         <span className="icon-bar">
           <span />
           <span />
           <span />
         </span>
-        <span className="text">All Categories</span>
+        <span className="text">Danh Mục Sản Phẩm</span>
       </div>
-      <div className="block-content verticalmenu-content">
+      <div className={menuClassShowUp}>
         <ul className="stelina-nav-vertical vertical-menu stelina-clone-mobile-menu">
-          <li className="menu-item">
-            <Link href="#">New Arrivals</Link>
-          </li>
-          <li className="menu-item">
-            <Link title="Hot Sale" href="#" className="stelina-menu-item-title">
-              Hot Sale
-            </Link>
-          </li>
-          <li className="menu-item menu-item-has-children">
-            <Link
-              title="Accessories"
-              href="#"
-              className="stelina-menu-item-title"
-            >
-              Accessories
-            </Link>
-            <span className="toggle-submenu" />
-            <ul role="menu" className=" submenu">
-              <li className="menu-item">
-                <a title="Living" href="#" className="stelina-item-title">
-                  Living
-                </a>
-              </li>
-              <li className="menu-item">
-                <Link title="Accents" href="#" className="stelina-item-title">
-                  Accents
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link
-                  title="New Arrivals"
-                  href="#"
-                  className="stelina-item-title"
-                >
-                  New Arrivals
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link
-                  title="Accessories"
-                  href="#"
-                  className="stelina-item-title"
-                >
-                  Accessories
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link title="Bedroom" href="#" className="stelina-item-title">
-                  Bedroom
-                </Link>
-              </li>
-            </ul>
-          </li>
-          <li className="menu-item">
-            <Link title="Accents" href="#" className="stelina-menu-item-title">
-              Accents
-            </Link>
-          </li>
-          <li className="menu-item">
-            <Link title="Tables" href="#" className="stelina-menu-item-title">
-              Tables
-            </Link>
-          </li>
-          <li className="menu-item">
-            <Link title="Dining" href="#" className="stelina-menu-item-title">
-              Dining
-            </Link>
-          </li>
-          <li className="menu-item">
-            <Link title="Lighting" href="#" className="stelina-menu-item-title">
-              Lighting
-            </Link>
-          </li>
-          <li className="menu-item">
-            <Link title="Office" href="#" className="stelina-menu-item-title">
-              Office
-            </Link>
-          </li>
+          {categories.map((category, key) => (
+            <li className="menu-item">
+              <Link href="#">{category.name}</Link>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

@@ -21,6 +21,9 @@ function LoginForm() {
   const handleSubmit = (values) => {
     UserModel.login(values)
       .then((res) => {
+
+        UserModel.setCookie('user', JSON.stringify(res.user), res.expires_in);
+
         localStorage.setItem('token', res.access_token);
         localStorage.setItem('user', JSON.stringify(res.user));
         navigate("/");

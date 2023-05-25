@@ -33,7 +33,7 @@ function ProductFeatured(props) {
             className="owl-products owl-slick equal-container nav-center"
             {...settings}
           >
-            {categories.map((category, key) => (
+            {/* {categories.map((category, key) => (
               <div className="product-item style-5">
                 <div className="product-inner equal-element">
                   <div className="product-thumb">
@@ -50,7 +50,7 @@ function ProductFeatured(props) {
                   </div>
                 </div>
               </div>
-            ))}
+            ))} */}
           </Slider>
         </div>
       </div>

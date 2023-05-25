@@ -10,11 +10,11 @@ function MainMenu(props) {
                     id="menu-main-menu"
                 >
                     <li className="menu-item  menu-item">
-                        <Link to={'/'}>Home</Link>
+                        <Link to={'/'}>Trang chủ</Link>
                         <span className="toggle-submenu" />
                     </li>
                     <li className="menu-item menu-item">
-                        <Link to={'/shop'}>Shop</Link>
+                        <Link to={'/shop'}>Trang shop</Link>
                     </li>
                 </ul>
             </div>
