@@ -38,7 +38,7 @@ class UserModel {
 		};
 		return new Promise((resolve, reject) => {
 			axios
-				.post(this.api_url + 'refresh',null,config)
+				.post(this.api_url + 'logout',null,config)
 				.then(res => {
 					resolve(true);
 				})
@@ -70,6 +70,9 @@ class UserModel {
 		d.setTime(d.getTime() + (minutes*60*1000));
 		let expires = "expires="+ d.toUTCString();
 		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
+	deleteCookie(name) {
+		document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 	}
 
 

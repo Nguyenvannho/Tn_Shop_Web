@@ -1,17 +1,16 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import UserModel from '../../models/UserModel';
 
 function HeaderUser(props) {
+  const navigate = useNavigate();
   const handleLogout = () => {
     // Gọi API đăng xuất
     UserModel.logout()
       .then((response) => {
-
-        console.log(response);
-        localStorage.removeItem('user');
+        UserModel.deleteCookie('user')
         // Xử lý khi đăng xuất thành công
         Swal.fire({
           icon: 'success',
@@ -22,7 +21,7 @@ function HeaderUser(props) {
            
 
           // Chuyển hướng đến trang đăng nhập
-          window.location.href = '/login';
+          navigate("/");
         });
       })
       .catch((error) => {
