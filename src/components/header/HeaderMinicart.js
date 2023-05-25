@@ -122,7 +122,7 @@ function HeaderMinicart(props) {
                 }}
               >
                 {cart.length === 0 && isHoverEmpty && (
-                  <h7 style={{ fontWeight: "bold", color: "red" }}>
+                  <h7 style={{ fontWeight: "bold", color: "red", fontWeight: "bold", textTransform: "capitalize" }}>
                     Không có sản phẩm nào trong giỏ hàng
                   </h7>
                 )}
