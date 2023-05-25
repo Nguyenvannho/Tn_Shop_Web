@@ -9,7 +9,19 @@ class CategoryModel {
             axios
             .get(this.api_url)
             .then(res => {
-                resolve(res);
+                resolve(res.data);
+            })
+            .catch(err => {
+                reject(err)
+            });
+        });
+    }
+    getProducts(id){
+        return new Promise( (resolve, reject) => {
+            axios
+            .get(this.api_url+"/"+id)
+            .then(res => {
+                resolve(res.data);
             })
             .catch(err => {
                 reject(err)
@@ -17,55 +29,5 @@ class CategoryModel {
         });
     }
 
-    // find(id){
-    //     return new Promise( (resolve, reject) => {
-    //         axios
-    //         .get(this.api_url+'/'+id)
-    //         .then(res => {
-    //             resolve(res.data);
-    //         })
-    //         .catch(err => {
-    //             reject(err)
-    //         });
-    //     });
-    // }
-
-    // store(data){
-    //     return new Promise( (resolve, reject) => {
-    //         axios
-    //         .post(this.api_url,data )
-    //         .then(res => {
-    //             resolve(res.data);
-    //         })
-    //         .catch(err => {
-    //             reject(err)
-    //         });
-    //     });
-    // }
-    
-    // update(id,data){
-    //     return new Promise( (resolve, reject) => {
-    //         axios
-    //         .put(this.api_url+'/'+id , data)
-    //         .then(res => {
-    //             resolve(res.data);
-    //         })
-    //         .catch(err => {
-    //             reject(err)
-    //         });
-    //     });
-    // }
-    // delete(id){
-    //     return new Promise( (resolve, reject) => {
-    //         axios
-    //         .delete(this.api_url+'/'+id)
-    //         .then(res => {
-    //             resolve(res.data);
-    //         })
-    //         .catch(err => {
-    //             reject(err)
-    //         });
-    //     });
-    // }
 }
 export default new CategoryModel();

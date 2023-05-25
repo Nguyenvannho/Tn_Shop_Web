@@ -7,8 +7,7 @@ function VerticalMenu(props) {
   useEffect(() => {
     CategoryModel.getAll()
       .then((res) => {
-        setCategories(res.data.data);
-        console.log(res.data.data);
+        setCategories(res.data);
       })
       .catch((err) => {
         throw err;
@@ -55,9 +54,11 @@ function VerticalMenu(props) {
       <div className={menuClassShowUp}>
         <ul className="stelina-nav-vertical vertical-menu stelina-clone-mobile-menu">
           {categories.map((category, key) => (
+            <Link to={"/category/" + category.id}>
             <li className="menu-item">
-              <Link href="#">{category.name}</Link>
+              <a>{category.name}</a>
             </li>
+            </Link>
           ))}
         </ul>
       </div>
