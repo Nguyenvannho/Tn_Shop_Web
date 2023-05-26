@@ -18,7 +18,7 @@ function Search() {
       });
       navigate("/shop?s="+search);
     } catch (error) {
-      console.error("Lỗi:", error.message);
+      console.error("error:", error.message);
     }
   };
 
