@@ -4,6 +4,7 @@ import HeaderMinicart from '../components/header/HeaderMinicart';
 import { Link } from 'react-router-dom';
 import VerticalMenu from '../components/header/VerticalMenu';
 import MainMenu from '../components/header/MainMenu';
+import Search from '../components/header/Search';
 
 function Header(props) {
     return (
@@ -32,41 +33,7 @@ function Header(props) {
                                     </Link>
                                 </div>
                             </div>
-                            <div className="col-lg-7 col-sm-8 col-md-6 col-xs-5 col-ts-12">
-                                <div className="block-search-block">
-                                    <form className="form-search form-search-width-category">
-                                        <div className="form-content">
-                                            <div className="category">
-                                                <select
-                                                    title="cate"
-                                                    data-placeholder="All Categories"
-                                                    className="chosen-select"
-                                                    tabIndex={1}
-                                                >
-                                                    <option value="United States">Accessories</option>
-                                                    <option value="United Kingdom">Accents</option>
-                                                    <option value="Afghanistan">Desks</option>
-                                                    <option value="Aland Islands">Sofas</option>
-                                                    <option value="Albania">New Arrivals</option>
-                                                    <option value="Algeria">Bedroom</option>
-                                                </select>
-                                            </div>
-                                            <div className="inner">
-                                                <input
-                                                    type="text"
-                                                    className="input"
-                                                    name="s"
-                                                    defaultValue=""
-                                                    placeholder="Search here"
-                                                />
-                                            </div>
-                                            <button className="btn-search" type="submit">
-                                                <span className="icon-search" />
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                           <Search/>
                             <div className="col-lg-2 col-sm-12 col-md-3 col-xs-12 col-ts-12">
                                 <div className="header-control">
                                     <HeaderMinicart/>
@@ -80,7 +47,7 @@ function Header(props) {
                                                             aria-expanded="true"
                                                             href="#header-tab-login"
                                                         >
-                                                            Login
+                                                            Đăng nhập
                                                         </a>
                                                     </li>
                                                     <li>
@@ -89,7 +56,7 @@ function Header(props) {
                                                             aria-expanded="true"
                                                             href="#header-tab-rigister"
                                                         >
-                                                            Register
+                                                            Đăng ký
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -116,7 +83,7 @@ function Header(props) {
                                                                         type="checkbox"
                                                                         className="input-checkbox"
                                                                     />
-                                                                    <span>Remember me</span>
+                                                                    <span>Ghi nhớ</span>
                                                                 </label>
                                                                 <input
                                                                     type="submit"

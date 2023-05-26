@@ -26,7 +26,7 @@ function Category(props) {
     <div className="row">
         <div className="content-area shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div className="site-main">
-                <h3 className="custom_blog_title">Tất cả sản phẩm</h3>
+                <h3 className="custom_blog_title">Trang sản phẩm</h3>
                 <TopControl />
                 <ul className="row list-products auto-clear equal-container product-grid">
                     {products.map((product, key) => (

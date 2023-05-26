@@ -28,7 +28,7 @@ function ProductFeatured(props) {
     <>
       <div className="stelina-product produc-featured product-featured rows-space-65">
         <div className="container">
-          <h3 className="custommenu-title-blog">Deal of the day</h3>
+          <h3 className="custommenu-title-blog">Sản phẩm nổi bật</h3>
           <Slider
             className="owl-products owl-slick equal-container nav-center"
             {...settings}

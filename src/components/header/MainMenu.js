@@ -14,7 +14,7 @@ function MainMenu(props) {
                         <span className="toggle-submenu" />
                     </li>
                     <li className="menu-item menu-item">
-                        <Link to={'/shop'}>Trang shop</Link>
+                        <Link to={'/shop'}>Trang sản phẩm</Link>
                     </li>
                 </ul>
             </div>

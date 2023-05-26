@@ -7,6 +7,7 @@
 .empty-cart-message {
   color:red;
 }
+
 .actions {
   display: flex;
   justify-content: center;

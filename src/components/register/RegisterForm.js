@@ -9,8 +9,8 @@ const rules = Yup.object().shape({
   email: Yup.string().required("Vui lòng nhập Email!"),
   name: Yup.string().required("Vui lòng nhập Tên!"),
   password: Yup.string().required("Vui lòng nhập Mật khẩu!"),
-  phone: Yup.string().required("Vui lòng nhập Số điện thoại!"),
-  gender: Yup.string().required("Vui lòng chọn Giới tính!"),
+  phone: Yup.number().required("Vui lòng nhập Số điện thoại!"),
+  gender: Yup.string().required("Vui lòng nhập Giới tính!"),
   address: Yup.string().required("Vui lòng nhập Địa chỉ!"),
 });
 
@@ -105,17 +105,17 @@ function RegisterForm() {
           />
         </div>
         <div className="form-row form-row-wide">
-          <label htmlFor="password" className="text">
+          <label htmlFor="phone" className="text">
           Số điện thoại*
           </label>
           <Field
             type="text"
-            id="password"
-            name="password"
+            id="phone"
+            name="phone"
             className="input-text"
           />
           <ErrorMessage
-            name="password"
+            name="phone"
             component="div"
             className="error-message"
           />

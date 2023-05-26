@@ -5,10 +5,10 @@ class ProductModel {
         this.api_url = 'http://127.0.0.1:8000/api/products';
     }
     
-    getAll(){
+    getAll(page = 1,s = ''){
         return new Promise( (resolve, reject) => {
             axios
-            .get(this.api_url)
+            .get(this.api_url + '?page=' + page + '&name=' + s)
             .then(res => {
                 resolve(res);
             })
