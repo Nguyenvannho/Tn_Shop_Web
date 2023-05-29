@@ -23,7 +23,7 @@ function LoginForm() {
       .then((res) => {
         UserModel.setCookie('user', JSON.stringify(res.user), res.expires_in);
         localStorage.setItem('token', res.access_token);
-        navigate("/");
+        navigate("/checkout");
         handleLoginSuccess();
       })
       .catch((err) => {

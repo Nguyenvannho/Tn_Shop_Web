@@ -11,8 +11,9 @@ function Checkout(props) {
         <LayoutMaster>
             <div className="main-content main-content-checkout">
                 <div className="container">
-                <Breadcrumb/>
-                    <h3 className="custom_blog_title">Thanh Toán</h3>
+                <Breadcrumb page_title="Checkout" />
+
+                    <h3 className="custom_blog_title">Thanh toán đơn hàng</h3>
                     <div className="checkout-wrapp">
                         <div className="shipping-address-form-wrapp">
                             <div className="shipping-address-form  checkout-form">
