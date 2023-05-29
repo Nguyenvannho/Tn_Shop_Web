@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import LayoutMaster from "../layouts/LayoutMaster";
 import Breadcrumb from "../components/global/Breadcrumb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import { SET_CART } from "../redux/action";
 import { NumericFormat } from "react-number-format";
+import UserModel from "../models/UserModel";
 
 function Cart(props) {
   const cart = useSelector((state) => state.cart);
@@ -13,10 +14,12 @@ function Cart(props) {
   const [cartTotal, setCartTotal] = useState(0);
   const [isRemoving, setIsRemoving] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const navigate = useNavigate();
+  // const user = useSelector((state) => state.user);
 
   useEffect(() => {
     let total = 0;
-    cart.map((cartItem, index) => {
+    cart.forEach((cartItem) => {
       total += cartItem.product.price * cartItem.quantity;
     });
     setCartTotal(total);
@@ -31,7 +34,7 @@ function Cart(props) {
       payload: newCart,
     });
     setIsRemoving(true);
-    setAlertMessage("Sản phẩm đã được xóa khỏi giỏ hàng thành công !.");
+    setAlertMessage("Sản phẩm đã được xóa khỏi giỏ hàng thành công!");
     setTimeout(() => {
       setIsRemoving(false);
       setAlertMessage("");
@@ -42,13 +45,29 @@ function Cart(props) {
     const id = e.target.id;
     const qty = e.target.value;
     const newCart = [...cart];
-    newCart[id].quantity = qty;
-    localStorage.setItem("cart", JSON.stringify(newCart));
-    dispatch({
-      type: SET_CART,
-      payload: newCart,
-    });
+    if (newCart[id]) {
+      newCart[id].quantity = qty;
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      dispatch({
+        type: SET_CART,
+        payload: newCart,
+      });
+    }
   };
+  const handleCheckout = () => {
+    let user = UserModel.getCookie('user');
+    user = user ? JSON.parse(user) : '';
+  
+    if (!user) {
+      alert("Bạn cần đăng nhập để thanh toán đơn hàng của bạn !");
+      navigate("/login");
+    } else {
+      localStorage.setItem("cart", JSON.stringify(cart));
+      dispatch({ type: SET_CART, payload: cart });
+      navigate("/checkout");
+    }
+  };
+  
 
   return (
     <LayoutMaster>
@@ -56,34 +75,36 @@ function Cart(props) {
 
       <div className="row">
         <div className="main-content-cart main-content col-sm-12">
-          <h3 className="custom_blog_title">Shopping Cart</h3>
+          <h3 className="custom_blog_title">Giỏ hàng</h3>
 
           <div className="page-main-content">
             <div className="shoppingcart-content">
               {cart.length === 0 ? (
                 <table className="cart-table">
-                  <tr>
-                    <td
-                      colSpan={6}
-                      style={{
-                        textAlign: "center",
-                        color: "#555",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Giỏ hàng trống, Nhấn vào
-                      <Link
-                        to="/shop"
+                  <tbody>
+                    <tr>
+                      <td
+                        colSpan={6}
                         style={{
-                          color: "#007bff",
-                          textDecoration: "underline",
+                          textAlign: "center",
+                          color: "#555",
+                          fontWeight: "bold",
                         }}
                       >
-                        đây
-                      </Link>
-                      để tiếp tục mua hàng
-                    </td>
-                  </tr>
+                        Giỏ hàng trống, Nhấn vào
+                        <Link
+                          to="/shop"
+                          style={{
+                            color: "#007bff",
+                            textDecoration: "underline",
+                          }}
+                        >
+                          đây
+                        </Link>
+                        để tiếp tục mua hàng
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               ) : (
                 <table className="cart-table">
@@ -167,9 +188,12 @@ function Cart(props) {
                   <Link to="/shop" className="button btn-continue-shopping">
                     Quay lại trang shop
                   </Link>
-                  <Link to="/checkout" className="button btn-cart-to-checkout">
+                  <button
+                    className="button btn-cart-to-checkout"
+                    onClick={handleCheckout}
+                  >
                     Đến nơi thanh toán
-                  </Link>
+                  </button>
                 </div>
               )}
             </div>

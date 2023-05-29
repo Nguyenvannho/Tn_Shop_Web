@@ -39,7 +39,7 @@ function Search() {
                 name="s"
                 value={search}
                 onChange={handleChangeSearch}
-                placeholder="Search here"
+                placeholder="Tìm kiếm tại đây"
               />
             </div>
             <button className="btn-search" type="submit">

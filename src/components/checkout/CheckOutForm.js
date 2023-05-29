@@ -1,73 +1,98 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React, { useEffect, useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
-import * as Yup from 'yup';
-import Swal from 'sweetalert2';
-import OrderModel from '../../models/OrderModel';
-import { useDispatch, useSelector } from "react-redux";
+import * as Yup from "yup";
+import Swal from "sweetalert2";
+import OrderModel from "../../models/OrderModel";
+import { useSelector } from "react-redux";
+import UserModel from "../../models/UserModel";
 
-
-const rules = Yup.object().shape({
-  name: Yup.string().required('Mời nhập tên người nhận!'),
-  email: Yup.string().required('Mời nhập email!'),
-  phone: Yup.string().required('Mời nhập số điện thoại người nhận!'),
-  address: Yup.string().required('Mời nhập địa chỉ!'),
-  note: Yup.string().required('Mời nhập địa chỉ nhận hàng của bạn!'),
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required("Vui lòng nhập tên người nhận!"),
+  email: Yup.string().required("Vui lòng nhập email!"),
+  phone: Yup.string().required("Vui lòng nhập số điện thoại người nhận!"),
+  address: Yup.string().required("Vui lòng nhập địa chỉ!"),
 });
 
-const initialValues = {
-  name: '',
-  email: '',
-  phone: '',
-  address: '',
-  note: ''
-};
-
 function CheckOutForm() {
-  const navigate = useNavigate();
-  const cart = useSelector(state => state.cart);//[]
+  const cart = useSelector((state) => state.cart);
+
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+  });
+
+  const initialValues = {
+    name: user.name,
+    email: user.email,
+    phone: user.phone,
+    address: user.address,
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    const customerCookie = UserModel.getCookie("user");
+    if (customerCookie) {
+      const customerData = JSON.parse(customerCookie);
+      setUser(customerData);
+    }
+  }, []);
 
   const handleSubmit = (values) => {
-    values.cart = cart
+    values.cart = cart;
     console.log(values);
     OrderModel.checkout(values)
       .then((res) => {
         Swal.fire({
-          icon: 'success',
-          title: 'Thanh toán thành công!',
+          icon: "success",
+          title: "Thanh toán thành công!",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
       })
       .catch((err) => {
         Swal.fire({
-          icon: 'success',
-          title: 'Thanh toán thẩt bại!',
+          icon: "success",
+          title: "Thanh toán thất bại!",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
       });
   };
 
   return (
     <Formik
+      enableReinitialize={true}
       initialValues={initialValues}
-      validationSchema={rules}
+      validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
       <Form className="checkout">
-
-        <h2 className="title-form"><strong>Địa chỉ giao hàng</strong></h2>
+        <h2 className="title-form">
+          <strong>Địa chỉ giao hàng</strong>
+        </h2>
         <p className="form-row form-row-first">
-          <label className="text" >Tên khách hàng*</label>
+          <label className="text">Tên khách hàng*</label>
           <Field
             type="text"
             id="name"
             name="name"
             className="input-text"
+            value={user.name}
+            onChange={handleChange}
           />
           <ErrorMessage name="name" component="div" className="error" />
         </p>
+
         <p className="form-row form-row-last">
           <label className="text">Email*</label>
           <Field
@@ -75,9 +100,12 @@ function CheckOutForm() {
             id="email"
             name="email"
             className="input-text"
+            value={user.email}
+            onChange={handleChange}
           />
           <ErrorMessage name="email" component="div" className="error" />
         </p>
+
         <p className="form-row form-row-last">
           <label className="text">Số điện thoại*</label>
           <Field
@@ -85,6 +113,8 @@ function CheckOutForm() {
             id="phone"
             name="phone"
             className="input-text"
+            value={user.phone}
+            onChange={handleChange}
           />
           <ErrorMessage name="phone" component="div" className="error" />
         </p>
@@ -95,19 +125,24 @@ function CheckOutForm() {
             id="address"
             name="address"
             className="input-text"
+            value={user.address}
+            onChange={handleChange}
           />
           <ErrorMessage name="address" component="div" className="error" />
         </p>
-        <p className="form-row form-row-last">
+        {/* <p className="form-row form-row-last">
           <label className="text">Ghi chú giao hàng*</label>
           <Field
-            type="text"
+            as="textarea"
             id="note"
             name="note"
             className="input-text"
+            value={user.note}
+            onChange={handleChange}
           />
           <ErrorMessage name="note" component="div" className="error" />
-        </p>
+        </p> */}
+
         <div className="form-row">
           <button type="submit" className="button-submit">
             Thanh Toán*
@@ -116,11 +151,6 @@ function CheckOutForm() {
       </Form>
     </Formik>
   );
-};
-
-
-
-
-
+}
 
 export default CheckOutForm;
