@@ -16,10 +16,25 @@ class CategoryModel {
             });
         });
     }
+
+    find(id){
+        return new Promise( (resolve, reject) => {
+            axios
+            .get(this.api_url+'/'+id)
+            .then(res => {
+                resolve(res.data);
+            })
+            .catch(err => {
+                reject(err)
+            });
+        });
+    }
+
+
     getProducts(id){
         return new Promise( (resolve, reject) => {
             axios
-            .get(this.api_url+"/"+id)
+            .get(this.api_url+"/getProducts/"+id)
             .then(res => {
                 resolve(res.data);
             })
