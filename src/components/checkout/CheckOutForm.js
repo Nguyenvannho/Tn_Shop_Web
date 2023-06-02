@@ -49,6 +49,7 @@ function CheckOutForm() {
 
   const handleSubmit = (values) => {
     values.cart = cart;
+    values.customer_id = user.id;
     console.log(values);
     OrderModel.checkout(values)
       .then((res) => {
